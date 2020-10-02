@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "./components/layout"
 import NoteList from "./components/noteList"
 
-function App() {
+const App = () => {
   return (
     <Layout>
       <NoteList />
