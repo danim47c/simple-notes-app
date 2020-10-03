@@ -31,11 +31,14 @@ const NotesList = () => {
         <NewNote />
       </div>
 
+      <br style={{margin: "0.75rem"}}/>
+
       <div
         style={{
-          margin: "1rem 2rem",
           display: "flex",
           width: "100%",
+          maxWidth: "600px",
+          overflowWrap: "break-word",
           flexDirection: "column",
           alignItems: "center"
         }}
