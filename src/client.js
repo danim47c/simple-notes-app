@@ -1,4 +1,8 @@
 import firebase from "firebase/app"
+import "firebase/auth"
+import "firebase/firestore"
+
+import { useState } from "react"
 
 const firebaseConfig = {
   apiKey: "AIzaSyBj5dqDLTKMKSyaiF-tcDNLczkoNRcAE7o",
@@ -12,3 +16,16 @@ const firebaseConfig = {
 }
 
 !firebase.apps.length && firebase.initializeApp(firebaseConfig)
+
+export const db = firebase.firestore()
+
+export const auth = firebase.auth()
+export const GoogleAuthProvider = new firebase.auth.GoogleAuthProvider()
+
+export const useAuth = () => {
+  const [user, setUser] = useState(undefined)
+
+  auth.onAuthStateChanged(setUser)
+
+  return user
+}

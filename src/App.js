@@ -1,13 +1,10 @@
-import Layout from "components/layout"
-import NewNote from "components/newNote"
-import NoteList from "components/noteList"
+import Layout from "components/Layout"
+import Notes from "components/Notes"
 import React from "react"
 
 const App = () => (
   <Layout>
-    <NewNote />
-    <br />
-    <NoteList />
+    <Notes />
   </Layout>
 )
 
