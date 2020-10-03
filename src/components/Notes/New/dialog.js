@@ -1,16 +1,32 @@
+import { db, dbTypes } from "client"
 import { UserContext } from "components/Layout"
 import React, { useContext, useState } from "react"
 
 const initialNewNote = { name: "", content: "" }
 
-const NewNoteDialog = () => {
+const NewNoteDialog = ({ onClose }) => {
   const user = useContext(UserContext)
   const [newNote, setNewNote] = useState(initialNewNote)
+
+  const checkIsValid = () => newNote.name && newNote.content
+
+  const addNote = () => {
+    db.collection("notes").add({
+      ...newNote,
+      uid: user.uid,
+      createdAt: dbTypes.FieldValue.serverTimestamp(),
+      updatedAt: dbTypes.FieldValue.serverTimestamp()
+    })
+
+    onClose()
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log("Hola")
+    if (!checkIsValid()) return
+
+    addNote()
   }
 
   return (
@@ -70,7 +86,11 @@ const NewNoteDialog = () => {
               setNewNote((newNote) => ({ ...newNote, content }))
             }
           />
-          <button type="submit">Add</button>
+          <div style={{ display: "flex", width: "40%", justifyContent: "space-around" }}>
+            <button onClick={onClose}>Cancel</button>
+            <button type="submit" disabled={!checkIsValid()} >Add</button>
+          </div>
+
         </form>
       </div>
     </div>
