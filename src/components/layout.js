@@ -1,14 +1,14 @@
 import React, { createContext } from "react"
-import { useAuthState } from "react-firebase-hooks/auth"
 import firebase from "firebase/app"
 import "firebase/auth"
 import Header from "./header"
+import { useAuth } from "../firebase"
 
 export const UserContext = createContext()
 
 const Layout = ({ children }) => {
   // argumento children (hijos)
-  const [user, loading] = useAuthState(firebase.auth())
+  const [user, loading] = useAuth()
 
   return (
     <UserContext.Provider value={user}>

@@ -1,4 +1,5 @@
 import firebase from "firebase/app"
+import { useEffect } from "react"
 
 const firebaseConfig = {
   apiKey: "AIzaSyD7nmO9gbvi1sJRuV6stjisS4jXse5_D9Y",
@@ -11,3 +12,11 @@ const firebaseConfig = {
 }
 
 !firebase.apps.length && firebase.initializeApp(firebaseConfig)
+
+export const useAuth = () => {
+  const [user, setUser] = useState()
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(setUser)
+  }, [])
+  return user
+}
